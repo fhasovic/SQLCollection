@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DC949E38-8F9E-4D5F-847B-8BCAC5487C69}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Packages\SQLCollection.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Packages\SQLCollectionDesign.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tests\ProjectTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SQLCollection">
+        <MSBuild Projects="Packages\SQLCollection.dproj"/>
+    </Target>
+    <Target Name="SQLCollection:Clean">
+        <MSBuild Projects="Packages\SQLCollection.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SQLCollection:Make">
+        <MSBuild Projects="Packages\SQLCollection.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SQLCollectionDesign">
+        <MSBuild Projects="Packages\SQLCollectionDesign.dproj"/>
+    </Target>
+    <Target Name="SQLCollectionDesign:Clean">
+        <MSBuild Projects="Packages\SQLCollectionDesign.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SQLCollectionDesign:Make">
+        <MSBuild Projects="Packages\SQLCollectionDesign.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProjectTest">
+        <MSBuild Projects="Tests\ProjectTest.dproj"/>
+    </Target>
+    <Target Name="ProjectTest:Clean">
+        <MSBuild Projects="Tests\ProjectTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectTest:Make">
+        <MSBuild Projects="Tests\ProjectTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SQLCollection;SQLCollectionDesign;ProjectTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SQLCollection:Clean;SQLCollectionDesign:Clean;ProjectTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SQLCollection:Make;SQLCollectionDesign:Make;ProjectTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
